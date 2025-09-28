@@ -1,5 +1,6 @@
 import React from 'react';
 import './BusinessCard.css';
+import QRCode from 'react-qr-code';
 
 const BusinessCard = () => {
   const handleEmailClick = () => {
@@ -14,13 +15,24 @@ const BusinessCard = () => {
     window.open('https://api.whatsapp.com/send?phone=5583999788683&text=Olá%20Vitor!%20Vi%20seu%20cartão%20de%20visita%20digital.', '_blank');
   };
 
+  const siteUrl = 'https://vitordevcart.netlify.app/';
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(siteUrl);
+      alert('Link copiado para a área de transferência!');
+    } catch (e) {
+      console.error('Erro ao copiar link:', e);
+    }
+  };
+
   return (
     <div className="business-card">
       <div className="card-container">
         {/* Header com logo */}
         <div className="card-header">
           <img 
-            src="/logo/logodevitorfundo.png" 
+            src={`${process.env.PUBLIC_URL}/logo/logodevitorfundo.png`} 
             alt="Logo Vitor Luis" 
             className="main-logo"
           />
@@ -56,6 +68,19 @@ const BusinessCard = () => {
               <span>Telefone</span>
             </button>
           </div>
+
+          {/* QR Code para compartilhar */}
+          <div className="qr-section">
+            <div className="qr-wrapper">
+              <QRCode value={siteUrl} size={128} bgColor="transparent" fgColor="#ffffff" />
+            </div>
+            <p className="qr-text">Escaneie o QR Code ou copie o link abaixo para compartilhar:</p>
+            <div className="qr-actions">
+              <input type="text" readOnly value={siteUrl} className="qr-link" />
+              <button className="contact-btn copy-btn" onClick={handleCopyLink}>Copiar link</button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
