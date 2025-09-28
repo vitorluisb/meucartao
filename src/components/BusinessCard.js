@@ -72,7 +72,7 @@ const BusinessCard = () => {
           {/* QR Code para compartilhar */}
           <div className="qr-section">
             <div className="qr-wrapper">
-              <QRCode value={siteUrl} size={128} bgColor="transparent" fgColor="#ffffff" />
+              <QRCode value={siteUrl} size={192} bgColor="#ffffff" fgColor="#000000" />
             </div>
             <p className="qr-text">Escaneie o QR Code ou copie o link abaixo para compartilhar:</p>
             <div className="qr-actions">
